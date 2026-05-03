@@ -1,0 +1,54 @@
+📁 Cấu trúc code chính
+- heuristic(a, b): hàm h(n)
+- get_neighbors(pos, grid): sinh các ô lân cận (8 hướng, có kiểm tra góc)
+- greedy_step(...): thực hiện một bước lặp của thuật toán
+- reconstruct_path(...): lấy đường đi từ parent
+- draw_grid(...): vẽ lưới và trạng thái
+- main(): vòng lặp xử lý sự kiện
+
+1. cài pygame:  
+pip install pygame
+
+2. Mô tả
+- Tìm đường bằng thuật toán Best First Search (Greedy) – Mô phỏng Pygame
+- Thuật toán quyết định hướng đi dựa trên hàm heuristic – ước lượng khoảng cách từ ô hiện tại đến đích, KHÔNG quan tâm đến chi phí thực tế đã đi.
+-  Vì thế nó tìm đường rất nhanh nhưng không đảm bảo đường ngắn nhất.
+
+3. Công thức thuật toán
+- Best First Search (Greedy)
++ Hàm đánh giá:  
+    f(n) = h(n)  
+  Trong đó:
+  +h(n) là khoảng cách Euclid  từ ô n đến đích (ước lượng đường chim bay)
+    + Mỗi bước, thuật toán chọn ô có h(n) nhỏ nhất trong hàng đợi ưu tiên.
+
+- So sánh với A*
++ A* dùng:  
+  f(n) = g(n) + h(n)
+  Kết hợp cả đường đã đi và đường còn lại, đảm bảo tìm được đường ngắn nhất.
+ Best First Search (Greedy) chỉ dùng h(n) → chạy nhanh hơn nhưng đường đi có thể dài hơn đáng kể.
+
+4. Bản đồ và di chuyển
+- Lưới ô vuông kích thước 20×15, mỗi ô 40×40 pixel.
+- Di chuyển 8 hướng (thẳng và chéo) nhưng cấm đi chéo qua góc tường (kiểm tra hai ô cạnh kề không được là vật cản).
+- Vật cản là ô đen, không thể đi qua.
+
+Phím	Chức năng
+S	Chế độ đặt Start (xanh)
+G	Chế độ đặt Goal (đỏ)
+O	Chế độ vẽ/xóa vật cản (đen)
+R	Reset toàn bộ bản đồ
+M	Sinh map ngẫu nhiên (30% vật cản) – cần có Start và Goal
+Space	Chạy một bước của thuật toán (lần đầu bắt đầu)
+Q	Thoát
+
+- Thao tác chuột với chế độ O
++ Giữ chuột trái + rê: vẽ vật cản.
++ Giữ chuột phải + rê: xóa vật cản.
++ Các bước demo
++ Nhấn S → click chuột trái đặt Start.
++ Nhấn G → click chuột trái đặt Goal.
++ Nhấn O → vẽ thêm vật cản (nếu muốn).
++ Nhấn Space nhiều lần để xem thuật toán mở rộng các ô theo thứ tự ưu tiên 
++ Khi tìm thấy đích, đường đi hiện màu tím.
+ 
